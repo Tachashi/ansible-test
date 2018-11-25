@@ -1,0 +1,22 @@
+---
+
+- hosts: cisco
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: run show command on remote devices
+      ios_command:
+        commands:
+          - show version
+        provider: "{{ cli }}"
+      register: result
+    - debug: var=result
+
+  vars:
+    cli:
+      host: 192.168.100.201
+      username: test3
+      password: cisco
+      authorize: true
+      auth_pass: test3
